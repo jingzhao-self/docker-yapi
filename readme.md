@@ -6,7 +6,7 @@ YApi:  https://github.com/YMFE/yapi/releases
 
 制作本地的yapi docker镜像, docker-compose一键维护和部署.
 
-## How
+## How to use
 
 1. 初始化db, 开启自定义配置
 
@@ -19,7 +19,7 @@ docker-compose up
 打开 localhost:9090
 
 - 默认部署路径为`/my-yapi`(需要修改docker-compose.yml才可以更改)
-- 修改管理员邮箱 `ryan.miao@demo.com` (随意, 修改为自己的邮箱)
+- 修改管理员邮箱 `jzhao6@glprop.com` (随意, 修改为自己的邮箱)
 - 修改数据库地址为 `mongo` 或者修改为自己的mongo实例 (docker-compose配置的mongo服务名称叫mongo)
 - 打开数据库认证
 - 输入数据库用户名: `yapi`(mongo配置的用户名, 见mongo-conf/init-mongo.js)
@@ -27,7 +27,7 @@ docker-compose up
 
 点击开始部署.
 
-![](doc/init.jpg)
+![](doc/init.png)
 ![](doc/init-2.jpg)
 
 2. 部署完毕后, 修改docker-compose.yml
@@ -53,7 +53,7 @@ docker-compose up
 
 访问 localhost:3000
 
-- 输入用户名ryan.miao@demo.com(自己输入的管理员邮箱)
+- 输入用户名jzhao6@glprop.com(自己输入的管理员邮箱)
 - 输入密码ymfe.org(默认的初始化密码, 之后可以修改)
 
 然后可以导入一个swagger的接口数据试试:
