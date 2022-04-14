@@ -48,6 +48,7 @@ docker-compose up
 重启服务:
 
 ```
+docker-compose stop
 docker-compose up
 ```
 
