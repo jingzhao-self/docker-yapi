@@ -1,7 +1,6 @@
 YApi Docker镜像
 ==============
 
-
 YApi:  https://github.com/YMFE/yapi/releases
 
 制作本地的yapi docker镜像, docker-compose一键维护和部署.
@@ -11,9 +10,9 @@ YApi:  https://github.com/YMFE/yapi/releases
 1. 初始化db, 开启自定义配置
 
 ```
-git clone https://github.com/Ryan-Miao/docker-yapi.git
+git clone https://github.com/jingzhao-self/docker-yapi.git
 cd docker-yapi
-docker-compose up
+docker-compose up -d
 ```
 
 打开 localhost:9090
@@ -27,12 +26,13 @@ docker-compose up
 
 点击开始部署.
 
-![](doc/init.png)
+![](image/2022-04-21-16-27-54.png)
 ![](doc/init-2.jpg)
 
-2. 部署完毕后, 修改docker-compose.yml
-启用
 
+
+2. 部署完毕后, 修改docker-compose.yml
+vim docker-compose.yml  #改启动配置和监听端口
 ```
   yapi:
     build:
@@ -45,14 +45,18 @@ docker-compose up
     command: "node /my-yapi/vendors/server/app.js"
 ```
 
+vim my-yapi/config.json  #确认端口为80
+{
+   "port": "80",
+
 重启服务:
 
 ```
 docker-compose stop
-docker-compose up
+docker-compose up -d
 ```
 
-访问 localhost:3000
+访问 localhost
 
 - 输入用户名jzhao6@glprop.com(自己输入的管理员邮箱)
 - 输入密码ymfe.org(默认的初始化密码, 之后可以修改)
@@ -63,11 +67,27 @@ docker-compose up
 ![](doc/start-2.jpg)
 
 
-3. 后台启动
+1. 后台启动
 
 前台启动确认没问题后, 直接
 ```
 docker-compose stop或者contrl+C
+docker-compose up -d
+```
+
+
+1. 禁止用户注册
+http://yapi.smart-xwork.cn/doc/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
+
+```
+vim /root/docker-yapi/my-yapi/config.json  #增加closeRegister配置
+{
+  "port": "*****",
+  "closeRegister":true
+}
+
+cd ~/docker-yapi/
+docker-compose stop
 docker-compose up -d
 ```
 

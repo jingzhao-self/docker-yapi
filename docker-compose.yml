@@ -34,6 +34,7 @@ services:
         - ./my-yapi:/my-yapi
     ports: 
       - 9090:9090
-      - 3000:3000
+      - 3000:3000  #这个没用了，我换成80端口了
+      - 80:80
     depends_on: 
       - mongo
