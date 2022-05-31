@@ -76,7 +76,7 @@ docker-compose up -d
 ```
 
 
-1. 禁止用户注册
+2. 禁止用户注册
 http://yapi.smart-xwork.cn/doc/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
 
 ```
@@ -90,6 +90,49 @@ cd ~/docker-yapi/
 docker-compose stop
 docker-compose up -d
 ```
+
+![](image/2022-05-31-09-39-24.png)
+
+
+3. 配置ldap
+http://yapi.smart-xwork.cn/doc/devops/index.html#%e9%85%8d%e7%bd%aeldap%e7%99%bb%e5%bd%95
+
+```
+vim /root/docker-yapi/my-yapi/config.json  #此种方式登录时不需要加邮箱
+   },
+  "ldapLogin": {
+      "enable": true,
+      "server": "ldap://10.129.144.11",
+      "baseDn": "CN=Service Account GRSLDAP,OU=Service Accounts,OU=CHN,OU=GLPROP,OU=China,DC=glprop,DC=com",
+      "bindPassword": "jM=!xYc4",
+      "searchDn": "OU=Robotics Services,OU=Users,OU=CHN,OU=GLPROP,OU=China,DC=glprop,DC=com",
+      "searchStandard": "&(objectClass=user)(sAMAccountName=%s)",
+      "emailPostfix": "@glprop.com",
+      "emailKey": "mail",
+      "usernameKey": "sAMAccountName"
+   }
+
+vim /root/docker-yapi/my-yapi/config.json  #此种方式需要以邮箱登录
+   },
+  "ldapLogin": {
+      "enable": true,
+      "server": "ldap://10.129.144.11",
+      "baseDn": "CN=Service Account GRSLDAP,OU=Service Accounts,OU=CHN,OU=GLPROP,OU=China,DC=glprop,DC=com",
+      "bindPassword": "jM=!xYc4",
+      "searchDn": "OU=Robotics Services,OU=Users,OU=CHN,OU=GLPROP,OU=China,DC=glprop,DC=com",
+      "searchStandard": "mail",
+      "emailPostfix": "@glprop.com",
+      "emailKey": "mail",
+      "usernameKey": "name"
+   }
+
+cd ~/docker-yapi/
+docker-compose stop yapi
+docker-compose up -d
+```
+
+![](image/2022-05-31-09-40-03.png)
+
 
 
 ## 数据备份
